@@ -9,7 +9,7 @@ export class SidenavComponent {
   @Input() isExpanded: boolean | undefined;
 
   public routeLinks = [
-    {link: "person", name: "Personas", icon: "people"},
+    {link: "persons", name: "Personas", icon: "people"},
     {link: "buses", name: "Colectivos", icon: "directions_bus"},
   ];
 }
