@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { PersonRoutingModule } from './person-routing.module';
-import { PersonListComponent } from './person-list/person-list.component';
-import { PersonDetailComponent } from './person-detail/person-detail.component';
+import {PersonRoutingModule} from './person-routing.module';
+import {PersonListComponent} from './person-list/person-list.component';
+import {PersonDetailComponent} from './person-detail/person-detail.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {PersonService} from "../person/person.service";
 import {MaterialModule} from "../material/material.module";
+import {DialogModule} from "../dialog/dialog.module";
 
 
 @NgModule({
@@ -19,8 +19,10 @@ import {MaterialModule} from "../material/material.module";
     CommonModule,
     PersonRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    DialogModule,
   ],
   providers: [PersonService]
 })
-export class PersonModule { }
+export class PersonModule {
+}

@@ -90,7 +90,7 @@ export class PersonDetailComponent implements OnInit {
   }
 
   goToBack() {
-    this.router.navigate(['list']);
+    this.router.navigate(['persons','list']);
   }
 
 }
