@@ -40,26 +40,20 @@ export class PersonService {
         ));
   }
 
-  create(person: Person): Observable<Person> {
-    return this.http.post<Person>(this.resourceUrl, person, {headers: this.headers}).pipe(
+  create(person: Person): Observable<any> {
+    return this.http.post<any>(this.resourceUrl, person, {headers: this.headers}).pipe(
       catchError(error => {
         console.log("Error")
         return throwError("La persona no pudo ser creada.");
-      }),
-      map(p => new Person(p.id,
-        p.firstName, p.lastName, p.age)
-      ));
+      }));
   }
 
-  update(person: Person): Observable<Person> {
-    return this.http.put<Person>(this.resourceUrl, person, {headers: this.headers}).pipe(
+  update(person: Person): Observable<any> {
+    return this.http.put<any>(this.resourceUrl, person, {headers: this.headers}).pipe(
       catchError(error => {
         console.log("Error")
         return throwError("La persona no pudo ser actualizada.");
-      }),
-      map(p => new Person(p.id,
-        p.firstName, p.lastName, p.age)
-      ));
+      }))
   }
 
   public delete(id: number): Observable<any> {
