@@ -6,11 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Curso de Angular';
 
-  public isExpanded = false;
-
-  public toggleMenu() {
-    this.isExpanded = !this.isExpanded;
-  }
 }

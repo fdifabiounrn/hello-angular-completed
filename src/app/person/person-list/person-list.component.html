@@ -1,9 +1,10 @@
+<div style="width: 70%">
 <button mat-fab color="primary" *ngIf="!loading"
         matTooltip="Crear"
         (click)="goToDetail(null)">
   <mat-icon>add</mat-icon>
 </button>
-<table mat-table [dataSource]="persons" *ngIf="!loading" class="mat-elevation-z8">
+<table mat-table [dataSource]="persons" *ngIf="!loading" class="mat-elevation-z8" style="width: 100%">
 
   <!-- id Column -->
   <ng-container matColumnDef="id">
@@ -43,4 +44,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>
 <mat-spinner *ngIf="loading" style="margin: 0px auto"></mat-spinner>

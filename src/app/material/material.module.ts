@@ -32,6 +32,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 const MaterialModules = [
@@ -63,7 +64,8 @@ const MaterialModules = [
   MatBadgeModule,
   MatToolbarModule,
   MatMenuModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

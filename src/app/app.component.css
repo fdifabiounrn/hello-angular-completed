@@ -291,10 +291,5 @@ svg#clouds {
   }
 }
 
-.content-container {
-  min-height: 100vh;
-  box-sizing: border-box;
-  padding: 25px;
-}
 
 
