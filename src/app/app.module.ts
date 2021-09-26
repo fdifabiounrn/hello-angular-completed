@@ -14,6 +14,7 @@ import {LoginFormComponent} from './login/login-form/login-form.component';
 import {TokenInterceptor} from "./security/interceptor/token-interceptor";
 import {LayoutComponent} from "./layout/layout.component";
 import {SidenavComponent} from "./sidenav/sidenav.component";
+import { UserShowPipe } from './pipes/user-show.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {SidenavComponent} from "./sidenav/sidenav.component";
     LayoutComponent,
     SidenavComponent,
     LoginFormComponent,
+    UserShowPipe,
   ],
   imports: [
     BrowserModule,

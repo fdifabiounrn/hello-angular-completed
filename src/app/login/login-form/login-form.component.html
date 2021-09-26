@@ -18,7 +18,7 @@
     </mat-form-field>
     <mat-form-field appearance="legacy" class="input-form">
       <mat-label>Contraseña:</mat-label>
-      <input matInput formControlName="password">
+      <input type="password" matInput formControlName="password">
       <ng-container *ngIf="fc.password.invalid &&(fc.password.dirty || fc.password.touched)">
         <mat-error *ngIf="fc.password.errors?.required">
           Este campo es requerido.

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from "../security/service/authentication.service";
 
 @Component({
   selector: 'layout',
@@ -10,7 +11,7 @@ export class LayoutComponent implements OnInit {
 
   public isExpanded = false;
 
-  constructor() {
+  constructor(public authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -18,5 +19,9 @@ export class LayoutComponent implements OnInit {
 
   public toggleMenu() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  public logOut() {
+    this.authenticationService.logout();
   }
 }

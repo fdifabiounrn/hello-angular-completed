@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authService.isLoggedIN()) {
+    if (this.authService.isLoggedIn()) {
       req = req.clone({
         setHeaders: {
           "Authorization": this.authService.token != null ? this.authService.token : '',

@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, filter, tap} from "rxjs/operators";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {User} from "../../domain/user";
 
 @Injectable({
   providedIn: 'root'
@@ -11,29 +13,25 @@ import {catchError, tap} from "rxjs/operators";
 export class AuthenticationService {
   private resourceUrl: string = environment.backendUrl + "login";
 
-  headers = new HttpHeaders(
-    {
-      Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZkaWZhYmlvQHVucm4uZWR1LmFyIiwic3ViIjoyNCwiaWF0IjoxNjMxMDE2MzA4LCJleHAiOjE2MzEwMTcyMDh9.Q1mqCbXr77ZMiBP2RR7otyFnzeu4CPNe2FpK3R3cSMc`,
-      ContentType: 'application/json'
-    }
-  );
-  private _loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private jwtHelper: JwtHelperService = new JwtHelperService();
+  private _loggedIn: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(public http: HttpClient,
               public router: Router) {
   }
 
-  get loggedIn(): Observable<boolean> {
+  get loggedIn(): Observable<User | null> {
     return this._loggedIn.asObservable();
   }
 
-  isLoggedIN(): boolean {
+  isLoggedIn(): boolean {
     const token = this.token;
-    return token !== null;
-  }
-
-  get token(): string | null {
-    return localStorage.getItem(environment.tokenName);
+    if (token !== null && !this.jwtHelper.isTokenExpired(token)) {
+      if (this._loggedIn.value === null)
+        this._loggedIn.next(new User(this.jwtHelper.decodeToken(token).username));
+      return true;
+    }
+    return false;
   }
 
   login(username: string, passowrd: string): Observable<any> {
@@ -43,17 +41,30 @@ export class AuthenticationService {
     };
     return this.http.post<any>(this.resourceUrl, login).pipe(
       catchError(error => {
-        console.log("Error")
-        return throwError("Usuario y/o contraseña invalido");
+        let errorMsg: string;
+        switch (error.status) {
+          case 401:
+            errorMsg = "Usuario y/o contraseña invalido";
+            break;
+          default:
+            errorMsg = "Error interno del servidor"
+        }
+        return throwError(errorMsg);
       }), tap(response => {
         localStorage.setItem(environment.tokenName, response.token);
-        this._loggedIn.next(true);
+        let decodeToken = this.jwtHelper.decodeToken(response.token);
+        let user: User = new User(decodeToken.username);
+        this._loggedIn.next(user);
       }));
   }
 
   logout() {
-    this._loggedIn.next(false);
+    this._loggedIn.next(null);
     localStorage.removeItem(environment.tokenName);
     return this.router.navigate(['login']);
+  }
+
+  get token(): string | null {
+    return localStorage.getItem(environment.tokenName);
   }
 }
