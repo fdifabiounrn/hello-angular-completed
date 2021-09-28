@@ -21,7 +21,7 @@ export class AuthenticationService {
   }
 
   get loggedIn(): Observable<User | null> {
-    return this._loggedIn.asObservable();
+    return this._loggedIn.asObservable().pipe(filter(user => user !== null));
   }
 
   isLoggedIn(): boolean {
