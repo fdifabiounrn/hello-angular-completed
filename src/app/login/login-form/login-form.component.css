@@ -1,11 +1,16 @@
 .input-form{
   display: flex;
 }
+.container-login{
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-image: url("https://www.digital55.com/wp-content/uploads/2019/03/angular7.png");
+}
 .mat-card-login{
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
-  margin-top: 20px;
 }

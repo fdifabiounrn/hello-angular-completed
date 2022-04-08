@@ -24,4 +24,7 @@ export class LayoutComponent implements OnInit {
   public logOut() {
     this.authenticationService.logout();
   }
+  public getUsername(){
+    return this.authenticationService._loggedIn.value?.username;
+  }
 }

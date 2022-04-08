@@ -14,7 +14,7 @@ export class AuthenticationService {
   private resourceUrl: string = environment.backendUrl + "login";
 
   private jwtHelper: JwtHelperService = new JwtHelperService();
-  private _loggedIn: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  public _loggedIn: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   constructor(public http: HttpClient,
               public router: Router) {
